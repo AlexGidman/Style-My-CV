@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Skills
+{% endblock %}
+
+{% block main %}
+
+<div style='width: 70%; margin: auto'>
+
+<h1>Skills</h1>
+
+{% if skills %}
+<form action="/change" method="post">
+    <div class="form check">
+        <dl>
+            {% for skill in skills %}
+            <input class="form-check-input" type="radio" name="skillSelect" value="{{skill['id']}}" onchange="jobCheck()">
+
+            <dt>{{skill['skill']}}</dt>
+            {% if skill['tag'] %}
+            <dd>{{skill['tag']}} </dd>
+            {% else %}
+            <dd>No Tag - Relevant for all CV's</dd>
+            {% endif %}
+            {% endfor %}
+        </dl>
+        <button class="btn btn-primary" type="submit" name="change" value='skillChange' disabled>Edit</button>
+    </div>
+</form>
+{% endif %}
+
+<div class="instructions">
+    <div style="text-align: center;"><b><i>Add skills relevanto to the job.</i></b></div><br>
+        Consider which skills are relevant to the type of jobs you're applying for - try looking for key skills listed in the job description, and search the top 10 skills for the job. If you're applying for a variety of different roles, remember to tag them with the type of CV you want: eg 'admin' 'sales'. If you leave the tag blank, it will appear on all CV's generated.
+
+        <br><br>
+
+</div>
+
+    <form action="/skills" method="post">
+        <div class="form-group" id='skills'>
+            <label for="skill">Skill:</label><br>
+            <input class="form-control" name="skill" placeholder="Problem Solving" type="text" maxlength="255">
+
+            <br>
+
+            <label for="tag">Tag: <i>- leave blank if relevant for all CV's!</i></label><br>
+            <input class="form-control" style="width:200px" name="tag" maxlength="20" placeholder="eg: 'admin'" type="text">
+        </div>
+
+
+        <div id="addToCV">
+            <button class="btn btn-primary" type="submit" name="submit" value='add' >Add to my CV</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

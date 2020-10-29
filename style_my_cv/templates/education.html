@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Education
+{% endblock %}
+
+{% block main %}
+
+<h1>Education</h1>
+
+<div style='width: 70%; margin: auto'>
+
+    {% if education %}
+    <form action="/change" method="post">
+        <div class="form check">
+            <dl>
+                {% for course in education %}
+                <input class="form-check-input" type="radio" name="courseSelect" value="{{course['id']}}" onchange="jobCheck()">
+
+                <dt>{{course['qualification']}} - {{course['provider']}}</dt>
+                {% if course['tag'] %}
+                <dd>{{course['tag']}} </dd>
+                {% else %}
+                <dd>No Tag - Relevant for all CV's</dd>
+                {% endif %}
+                {% endfor %}
+            </dl>
+            <button class="btn btn-primary" type="submit" name="change" value='qualChange' disabled>Edit</button>
+        </div>
+    </form>
+    {% endif %}
+
+
+    <div class="instructions">
+        <div style="text-align: center;"><b><i>Education, Education, Education!</i></b></div><br>
+            Consider which courses / qualifications are relevant to the type of jobs you're applying for. If you're applying for a variety of different roles, remember to tag them with the type of CV you want: eg 'admin' 'sales'. If you leave the tag blank, it will appear on all CV's generated.
+            <br><br>
+
+    </div>
+
+        <form action="/education" method="post">
+            <div class="form-group" id='education'>
+                <label for="qualification">Qualification:</label><br>
+                <input class="form-control" name="qualification" placeholder="BSc Engineering..." type="text" maxlength="255">
+
+                <label for="provider">Provider:</label><br>
+                <input class="form-control" name="provider" placeholder="University of..." type="text" maxlength="255">
+
+                <label for="grade">Grade:</label><br>
+                <input class="form-control" name="grade" placeholder="Leave blank if not applicable" type="text" maxlength="255">
+
+                <label for="datestart">Start Date:</label><br>
+                <input class="form-control" name="datestart" type="month" maxlength="255">
+
+                <label for="dateend">End Date:</label><br>
+                <input type="month" name="dateend" class="form-control">
+                <label for="present">Present</label>
+                <input type="checkbox" name="present" onchange="presentCheck()">
+                <br>
+
+                <label for="tag">Tag: <i>- leave blank if relevant for all CV's!</i></label><br>
+                <input class="form-control" style="width:200px" name="tag" maxlength="20" placeholder="eg: 'admin'" type="text">
+            </div>
+
+
+
+            <div id="addToCV">
+                <button class="btn btn-primary" type="submit" name="submit" value='add' >Add to my CV</button>
+            </div>
+        </form>
+
+</div>
+
+{% endblock %}

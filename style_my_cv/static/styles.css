@@ -1,0 +1,104 @@
+nav .navbar-brand {
+    /* size for brand */
+    font-size: xx-large;
+}
+
+/* colors for brand */
+nav .navbar-brand .blue {
+    color: #537fbe;
+}
+nav .navbar-brand .red {
+    color: #ea433b;
+}
+nav .navbar-brand .yellow {
+    color: #f5b82e;
+}
+nav .navbar-brand .green {
+    color: #2e944b;
+}
+
+main {
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+}
+
+
+h1 {
+    text-align: center;
+    color: #6699CC;
+}
+
+h2 {
+    color: #6699CC;
+}
+
+.button {
+    color: green;
+}
+
+#addToCV {
+    text-align: center;
+}
+
+#details {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+#employment {
+    padding-top: 1em;
+    width: 70%;
+}
+
+#education {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#skills {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#homepage {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    width: 50%;
+}
+
+#printeableArea {
+    font-family: PT Sans;
+    width: 642px;
+    height: 933px;
+}
+
+
+.instructions {
+    padding-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+
+}
+
+.column {
+    float: left;
+    width: 74%;
+    padding-top: 10px;
+    padding-left: 30px;
+}
+
+.column2 {
+    float: left;
+    width: 24%;
+    padding: 10px;
+}
+
+.column3 {
+    float: none;
+    width: 2%;
+    padding: 10px;
+}
