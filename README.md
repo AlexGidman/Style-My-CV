@@ -9,10 +9,15 @@ Style My CV is a web application. You register and login to your account, store 
 * CSS
 * JavaScript
 * SQL (SQLite3)
+* Specific modules - see requirements.txt
 
-### Executing program
+### Executing program (dev mode only)
 
-* Open Terminal, cd into desired directory and run
+* Open Terminal, cd into the directory, and export / set:
+```
+export FLASK_APP=style_my_cv
+```
+* Then run the flask app:
 ```
 flask run
 ```
