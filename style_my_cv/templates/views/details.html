@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Details
+{% endblock %}
+
+{% block main %}
+
+<h1>Details</h1>
+
+        <form action="/details" method="post">
+            <div id='details'>
+                <br>
+                <h2>Professional Summary</h2>
+                <div class="form-group">
+                    {% if not details %}
+                    <div class="form-group">
+                        <textarea class="form-control" rows="8" name="summary" maxlength="300" placeholder="3 senteces that accurately describe your personality, professional traits, and what you're looking for in your next career move." type="text"></textarea>
+                    </div>
+                    {% else %}
+                    <textarea class="form-control" rows="8" name="summary" maxlength="1000" type="text">{{details['summary']}}</textarea>
+                    </div>
+                    {% endif %}
+
+
+                <br>
+                <h2>Contact</h2>
+                <div class="form-group">
+                    <label for="name">Full Name:</label><br>
+                    {% if not details %}
+                    <input autofocus class="form-control" name="name" placeholder="John Smith" type="text" required>
+                    {% else %}
+                    <input autofocus class="form-control" name="name" type="text" value="{{details['name']}}">
+                    {% endif %}
+
+                    <label for="address">Address:</label><br>
+                    {% if not details %}
+                    <input autofocus class="form-control" name="address" placeholder="##, Street, Town, Post or Zip Code" type="text">
+                    {% else %}
+                    <input autofocus class="form-control" name="address" type="text" value="{{details['address']}}">
+                    {% endif %}
+
+                    <label for="phone">Phone Number:</label><br>
+                    {% if not details %}
+                    <input class="form-control" name="phone" type="tel" pattern="[0-9]{11}">
+                    {% else %}
+                    <input class="form-control" name="phone" type="tel" pattern="[0-9]{11}" value="{{details['phone']}}">
+                    {% endif %}
+
+                    <label for="email">Email Address:</label><br>
+                    {% if not details %}
+                    <input class="form-control" name="email" placeholder="email@example.com" type="email">
+                    {% else %}
+                    <input class="form-control" name="email"  type="email" value="{{details['email']}}">
+                    {% endif %}
+
+                </div><br>
+                <h2>Links</h2>
+                <div class="form-group">
+                    <label for="email">LinkedIn: <i> - eg: http://www.linkedin/yourname.com</i></label><br>
+                    {% if not details %}
+                    <input class="form-control" name="linkedin" placeholder="linkedin.com/in/example/" type="text">
+                    {% else %}
+                    <input class="form-control" name="linkedin" type="text" value="{{details['linkedin']}}">
+                    {% endif %}
+
+                    <label for="email">Website:<i> - eg: http://www.yourwebsite.com</i></label><br>
+                    {% if not details %}
+                    <input class="form-control" name="website" placeholder="www.example.com" type="text">
+                    {% else %}
+                    <input class="form-control" name="website" type="text" value="{{details['website']}}">
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div id="addToCV">
+                <button class="btn btn-primary" type="submit">Add to my CV</button>
+            </div>
+        </form>
+
+
+
+{% endblock %}

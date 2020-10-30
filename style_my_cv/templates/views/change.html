@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Employment
+{% endblock %}
+
+{% block main %}
+
+<!-- EDIT JOB -->
+
+{% if job %}
+<h1>Employment</h1>
+
+    <form action="/employment" method="post" onsubmit="AreYouSure()">
+        <div class="form-group" id='employment'>
+            <input type="hidden" value="{{job['id']}}" name="job_id">
+
+            <label for="position">Position:</label><br>
+            <input autofocus class="form-control" name="position" type="text" maxlength="255" value="{{job['position']}}">
+
+            <label for="company">Company:</label><br>
+            <input class="form-control" name="company" type="text" maxlength="255" value="{{job['company']}}">
+
+            <label for="location">Location:</label><br>
+            <input class="form-control" name="location" type="text" maxlength="255" value="{{job['location']}}">
+
+            <label for="datestart">Start Date:</label><br>
+            <input class="form-control" name="datestart" type="month" maxlength="255" value="{{job['datestart']}}">
+
+            {% if job['dateend'] != "Present" %}
+                <label for="dateend">End Date:</label><br>
+                <input type="month" name="dateend" class="form-control" value="{{job['dateend']}}">
+                <label for="present">Present</label>
+                <input type="checkbox" name="present" onchange="presentCheck()">
+            {% else %}
+                <label for="dateend">End Date:</label><br>
+                <input type="month" name="dateend" class="form-control" disabled>
+                <label for="present">Present</label>
+                <input type="checkbox" name="present" onchange="presentCheck()" checked>
+            {% endif %}
+
+        </div>
+
+        <div class="form-group">
+            <label for="description">Key achievements within this role:</label><br>
+            <textarea class="form-control" rows="8" name="description" maxlength="1000" type="text">{{job['description']}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="tag">Tag:</label><br>
+            <input class="form-control" style="width:200px" name="tag" maxlength="20" type="text" value="{{job['tag']}}">
+        </div>
+
+
+
+        <div id="addToCV">
+            <button class="btn btn-primary" type="submit" name="submit" value='update'>Update</button>
+            <span><button class="btn btn-danger" type="submit" name="submit" value='delete'>Delete</button></span>
+        </div>
+    </form>
+
+{% endif %}
+
+
+<!-- EDIT COURSE -->
+
+{% if course %}
+<h1>Education</h1>
+
+    <form action="/education" method="post">
+        <div class="form-group" id='education'>
+            <input type="hidden" value="{{course['id']}}" name="course_id">
+
+            <label for="qualification">Qualification:</label><br>
+            <input autofocus class="form-control" name="qualification" type="text" maxlength="255" value="{{course['qualification']}}">
+
+            <label for="provider">Provider:</label><br>
+            <input class="form-control" name="provider" type="text" maxlength="255" value="{{course['provider']}}">
+
+            <label for="location">Grade:</label><br>
+            <input class="form-control" name="grade" type="text" maxlength="255" value="{{course['grade']}}">
+
+            <label for="datestart">Start Date:</label><br>
+            <input class="form-control" name="datestart" type="month" maxlength="255" value="{{course['datestart']}}">
+
+            {% if course['dateend'] != "Present" %}
+                <label for="dateend">End Date:</label><br>
+                <input type="month" name="dateend" class="form-control" value="{{course['dateend']}}">
+                <label for="present">Present</label>
+                <input type="checkbox" name="present" onchange="presentCheck()">
+            {% else %}
+                <label for="dateend">End Date:</label><br>
+                <input type="month" name="dateend" class="form-control" disabled>
+                <label for="present">Present</label>
+                <input type="checkbox" name="present" onchange="presentCheck()" checked>
+            {% endif %}
+            <label for="tag">Tag: <i>- leave blank if relevant for all CV's!</i></label><br>
+            <input class="form-control" style="width:200px" name="tag" maxlength="20" type="text" value="{{course['tag']}}">
+        </div>
+
+        <div id="addToCV">
+            <button class="btn btn-primary" type="submit" name="submit" value='update'>Update</button>
+            <span><button class="btn btn-danger" type="submit" name="submit" value='delete'>Delete</button></span>
+        </div>
+    </form>
+
+{% endif %}
+
+
+<!-- EDIT SKILL -->
+
+{% if skill %}
+<h1>Skills</h1>
+
+    <form action="/skills" method="post">
+        <div class="form-group" id='skills'>
+            <input type="hidden" value="{{skill['id']}}" name="skill_id">
+
+            <label for="skill">Skill:</label><br>
+            <input autofocus class="form-control" name="skill" type="text" maxlength="255" value="{{skill['skill']}}">
+
+            <br>
+
+            <label for="tag">Tag: <i>- leave blank if relevant for all CV's!</i></label><br>
+            <input class="form-control" style="width:200px" name="tag" maxlength="20" type="text" value="{{skill['tag']}}">
+        </div>
+
+        <div id="addToCV">
+            <button class="btn btn-primary" type="submit" name="submit" value='update'>Update</button>
+            <span><button class="btn btn-danger" type="submit" name="submit" value='delete'>Delete</button></span>
+        </div>
+    </form>
+
+{% endif %}
+
+
+{% endblock %}

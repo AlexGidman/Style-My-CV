@@ -1,0 +1,145 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block main %}
+
+<div style='text-align: center; width: 70%; margin: auto'>
+    <h2>Welcome to Style My CV!</h2> <br> Tag skills, employment history, and education to generate multiple copies of
+    your CV, targeted fro specific roles. Once you've filled in your details, select a tag (or no tag for a general CV),
+    click on Generate CV, and then Print CV!
+</div><br>
+
+<div id="homepage">
+
+    <form action="/" method="post" id="genCV">
+        {% if tags %}
+        <select class="form-control" id="tag" name="tag" type="submit" style="width: 25%; float: left">
+            <option value="No Tag">No Tag</option>
+            {% for label in tags: %}
+            {% if label == tag %}
+            <option value="{{label}}" selected>{{ label }}</option>
+            {% else %}
+            <option value="{{label}}">{{ label }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <button class="btn btn-secondary" type="submit" style="float: none">Generate CV</button>
+        {% endif %}
+        <button class="btn btn-primary" type="button" onclick="printDiv('printableArea')" style="float: right">
+            PrintCV
+        </button>
+    </form>
+</div>
+
+<br>
+
+<div style='border:solid'>
+
+    <div id="printableArea">
+        {% if details %}
+        <!-- Title -->
+        <div style="font-size: 64px; padding-top:20px; padding-left: 10px"><b>{{ details.name }}</b></div>
+        {% endif %}
+
+        <!-- Left Column  - Profile, Emplyment, Education -->
+
+        <div class="row">
+            <div class="column">
+
+                <!-- Profile -->
+                <h2>Profile</h2>
+                {% if details %}
+                <p>{{ details.summary }}</p>
+                {% endif %}
+
+                <!-- Employment -->
+                <h2>Employment</h2>
+                {% if employment %}
+
+                {% for job in employment %}
+                    {% if not job.tag %}
+                    <p><b>{{ job.position }} at {{ job.company }}, {{ job.location }}</b><br>
+                        <i>{{ job.datestart }} - {{ job.dateend }}</i><br>
+                        {{ job.description }}</p>
+                    {% endif %}
+
+
+                    {% if job.tag == tag %}
+                    <p><b>{{ job.position }} at {{ job.company }}, {{ job.location }}</b><br>
+                        <i>{{ job.datestart }} - {{ job.dateend }}</i><br>
+                        {{ job.description }}</p>
+                    {% endif %}
+                {% endfor %}
+
+                {% endif %}
+                <!-- TODO: Education -->
+                <h2>Education</h2>
+                {% if education %}
+
+                {% for course in education %}
+                    {% if not course.tag %}
+                    <p><b>{{ course.grade }} - {{ course.qualification }} at {{ course.provider }}</b><br>
+                        <i>{{ course.datestart }} - {{ course.dateend }}</i></p>
+                    {% endif %}
+
+                    {% if course.tag == tag %}
+                    <p><b>{{ course.grade }} - {{ course.qualification }} at {{ course.provider }}</b><br>
+                        <i>{{ course.datestart }} - {{ course.dateend }}</i></p>
+                    {% endif %}
+                {% endfor %}
+
+                {% endif %}
+
+            </div>
+
+            <!-- Spacer Column -->
+            <div class="column3"></div>
+
+            <!-- Right Column  - Details, Links, Skills -->
+
+            <div class="column2">
+                <h2>Details</h2>
+                {% if details %}
+                <p>{{ details.address }}<br>{{ details.phone }}<br><a style="color: #537fbe"
+                        href="mailto: {{ details.email }}">{{ details.email }}</a></p>
+
+                {% if details.linkedin or details.website %}
+                <h2>Links</h2>
+                <p>
+                    {% if details.linkedin %}
+                    <a style="color: #537fbe" href="{{ details.linkedin }}">LinkedIn</a>
+                    {% endif %}
+                    <br>
+                    {% if details.website %}
+                    <a style="color: #537fbe" href="{{ details.website }}">Website</a>
+                    {% endif %}
+                </p>
+                {% endif %}
+
+                {% endif %}
+
+                <h2>Skills</h2>
+                {% if skills %}
+                <p>
+                    {% for skill in skills %}
+                        {% if not skill.tag %}
+                        {{ skill.skill }}<br><br>
+                        {% endif %}
+
+                        {% if skill.tag == tag %}
+                        {{ skill.skill }}<br><br>
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% endblock %}
