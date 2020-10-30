@@ -20,3 +20,7 @@ function presentCheck() {
  function jobCheck() {
       document.querySelector("button[name='change']").disabled = false;
  }
+
+ function AreYouSure() {
+     return confirm("Are You Sure?")
+ }

@@ -34,16 +34,14 @@ def create_app(test_config=None):
         pass
         # raise OSError("Problem creating or reading instance folder")
 
-    # a simple page that says hello
-    @app.route('/')
-    def hello():
-        return 'Hello, World!'
-
     from . import db
     db.init_app(app)
 
     from . import auth
     app.register_blueprint(auth.bp)
 
+    from . import views
+    app.register_blueprint(views.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app
